@@ -34,11 +34,11 @@ const Card: NextPage = () => {
               className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
             >
               <div className="flex justify-between">
-                <FlagIcon className="m-2 opacity-60" />
-                <ReverseIcon className="m-2 opacity-60" />
+                <FlagIcon className="ml-2 mt-2 opacity-60" />
+                <ReverseIcon className="mr-2 mt-2 opacity-60" />
               </div>
               <Word className="mx-auto text-7xl" word={word} />
-              <SoundIcon className="m-2 self-end opacity-60" />
+              <SoundIcon className="mb-2 mr-2 self-end opacity-60" />
             </div>
           );
         })}
