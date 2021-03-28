@@ -11,6 +11,7 @@ const words = ["word", "test", "apple"];
 
 const Card: NextPage = () => {
   const [index, setIndex] = useState(0);
+  const [isFront, setIsFront] = useState(true);
   const previousWord = () => {
     if (index !== 0) {
       setIndex(index - 1);
@@ -28,14 +29,34 @@ const Card: NextPage = () => {
       </h1>
       <SwipeableViews index={index} onChangeIndex={(index) => setIndex(index)}>
         {words.map((word) => {
-          return (
+          return isFront ? (
             <div
               key={word}
               className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
             >
               <div className="flex justify-between">
                 <FlagIcon className="ml-2 mt-2 opacity-60" />
-                <ReverseIcon className="mr-2 mt-2 opacity-60" />
+                <ReverseIcon
+                  className="mr-2 mt-2 opacity-60"
+                  onClick={() => setIsFront(false)}
+                />
+              </div>
+              <Word className="mx-auto text-7xl" word={word} />
+              <SoundIcon className="mb-2 mr-2 self-end opacity-60" />
+            </div>
+          ) : (
+            <div
+              key={word}
+              className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-pink-400 bg-pink-300"
+            >
+              <div className="flex justify-between">
+                <FlagIcon className="ml-2 mt-2 opacity-60" />
+                <ReverseIcon
+                  className="mr-2 mt-2 opacity-60"
+                  onClick={() => {
+                    setIsFront(true);
+                  }}
+                />
               </div>
               <Word className="mx-auto text-7xl" word={word} />
               <SoundIcon className="mb-2 mr-2 self-end opacity-60" />
