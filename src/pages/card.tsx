@@ -23,7 +23,7 @@ const Card: NextPage = () => {
   };
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-100">
-      <h1 className="mx-auto my-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
+      <h1 className="mx-auto mt-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
         単語カード
       </h1>
       <SwipeableViews index={index} onChangeIndex={(index) => setIndex(index)}>
@@ -45,7 +45,7 @@ const Card: NextPage = () => {
       </SwipeableViews>
       <div className="mx-auto flex">
         <button
-          className="mx-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
+          className="mr-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
           onClick={previousWord}
         >
           <svg
@@ -64,7 +64,7 @@ const Card: NextPage = () => {
           </svg>
         </button>
         <button
-          className="mx-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
+          className="ml-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
           onClick={nextWord}
         >
           <svg
@@ -85,7 +85,7 @@ const Card: NextPage = () => {
       </div>
 
       <Link href="/">
-        <button className="mx-auto my-20 w-32 h-10 rounded-full shadow bg-green-300 hover:bg-green-400">
+        <button className="mx-auto mb-14 w-32 h-10 rounded-full shadow bg-green-300 hover:bg-green-400">
           ホームへ
         </button>
       </Link>
