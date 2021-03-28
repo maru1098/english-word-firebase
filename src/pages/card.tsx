@@ -5,9 +5,13 @@ import { ReverseIcon } from "src/components/card/ReverseIcon";
 import { SoundIcon } from "src/components/card/SoundIcon";
 import { Word } from "src/components/card/word";
 import SwipeableViews from "react-swipeable-views";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const words = ["word", "test", "apple"];
+const words = [
+  { english: "word", japanese: "単語" },
+  { english: "test", japanese: "試験" },
+  { english: "apple", japanese: "りんご" },
+];
 
 const Card: NextPage = () => {
   const [index, setIndex] = useState(0);
@@ -22,6 +26,9 @@ const Card: NextPage = () => {
       setIndex(index + 1);
     }
   };
+  useEffect(() => {
+    setIsFront(true);
+  }, [index]);
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gray-100">
       <h1 className="mx-auto mt-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
@@ -31,7 +38,7 @@ const Card: NextPage = () => {
         {words.map((word) => {
           return isFront ? (
             <div
-              key={word}
+              key={word.english}
               className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
             >
               <div className="flex justify-between">
@@ -41,12 +48,12 @@ const Card: NextPage = () => {
                   onClick={() => setIsFront(false)}
                 />
               </div>
-              <Word className="mx-auto text-7xl" word={word} />
+              <Word className="mx-auto text-7xl" word={word.english} />
               <SoundIcon className="mb-2 mr-2 self-end opacity-60" />
             </div>
           ) : (
             <div
-              key={word}
+              key={word.japanese}
               className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-pink-400 bg-pink-300"
             >
               <div className="flex justify-between">
@@ -58,7 +65,7 @@ const Card: NextPage = () => {
                   }}
                 />
               </div>
-              <Word className="mx-auto text-7xl" word={word} />
+              <Word className="mx-auto text-7xl" word={word.japanese} />
               <SoundIcon className="mb-2 mr-2 self-end opacity-60" />
             </div>
           );
