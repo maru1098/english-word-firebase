@@ -37,7 +37,7 @@ const Card: NextPage = () => {
     setIsFront(true);
   }, [index]);
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-100">
+    <div className="min-h-screen ios-height flex flex-col justify-between bg-gray-100">
       <h1 className="mx-auto mt-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
         単語カード
       </h1>
@@ -67,7 +67,7 @@ const Card: NextPage = () => {
           ) : (
             <div
               key={word.japanese}
-              className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
+              className="flex flex-col justify-between mt-10 w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
             >
               <div className="flex justify-between">
                 <FlagIcon className="ml-2 mt-2 opacity-60 sm:hover:gb-gray-100 rounded-full p-1" />
