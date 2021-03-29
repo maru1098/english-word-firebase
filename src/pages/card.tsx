@@ -27,6 +27,10 @@ const Card: NextPage = () => {
       setIndex(index + 1);
     }
   };
+  const speakText = (text: string) => {
+    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  };
+
   useEffect(() => {
     setIsFront(true);
   }, [index]);
@@ -35,7 +39,10 @@ const Card: NextPage = () => {
       <h1 className="mx-auto mt-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
         単語カード
       </h1>
-      <SwipeableViews index={index} onChangeIndex={(index) => setIndex(index)}>
+      <SwipeableViews
+        index={index}
+        onChangeIndex={(index: number) => setIndex(index)}
+      >
         {words.map((word) => {
           return isFront ? (
             <div
@@ -50,7 +57,10 @@ const Card: NextPage = () => {
                 />
               </div>
               <Word className="mx-auto text-7xl" word={word.english} />
-              <SoundIcon className="mb-2 mr-2 self-end opacity-60 hover:bg-gray-100 rounded-full p-1" />
+              <SoundIcon
+                className="mb-2 mr-2 self-end opacity-60 hover:bg-gray-100 rounded-full p-1"
+                onClick={() => speakText(word.english)}
+              />
             </div>
           ) : (
             <div

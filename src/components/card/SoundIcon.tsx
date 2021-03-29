@@ -2,6 +2,7 @@ import type { VFC } from "react";
 
 type Props = {
   className?: string;
+  onClick?: () => void;
 };
 
 export const SoundIcon: VFC<Props> = (props) => {
@@ -14,6 +15,7 @@ export const SoundIcon: VFC<Props> = (props) => {
       height="40"
       viewBox="0 0 24 24"
       stroke="currentColor"
+      onClick={props.onClick}
     >
       <path
         strokeLinecap="round"
