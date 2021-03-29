@@ -43,31 +43,28 @@ const Card: NextPage = () => {
               className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
             >
               <div className="flex justify-between">
-                <FlagIcon className="ml-2 mt-2 opacity-60" />
+                <FlagIcon className="ml-2 mt-2 opacity-60 hover:bg-gray-100 rounded-full p-1" />
                 <ReverseIcon
-                  className="mr-2 mt-2 opacity-60"
+                  className="mr-2 mt-2 opacity-60 hover:bg-gray-100 rounded-full p-1"
                   onClick={() => setIsFront(false)}
                 />
               </div>
               <Word className="mx-auto text-7xl" word={word.english} />
-              <SoundIcon className="mb-2 mr-2 self-end opacity-60" />
+              <SoundIcon className="mb-2 mr-2 self-end opacity-60 hover:bg-gray-100 rounded-full p-1" />
             </div>
           ) : (
             <div
               key={word.japanese}
-              className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-pink-400 bg-pink-300"
+              className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
             >
               <div className="flex justify-between">
-                <FlagIcon className="ml-2 mt-2 opacity-60" />
+                <FlagIcon className="ml-2 mt-2 opacity-60 hover:gb-gray-100 rounded-full p-1" />
                 <ReverseIcon
-                  className="mr-2 mt-2 opacity-60"
-                  onClick={() => {
-                    setIsFront(true);
-                  }}
+                  className="mr-2 mt-2 opacity-60 hover:bg-gray-100 rounded-full p-1"
+                  onClick={() => setIsFront(true)}
                 />
               </div>
-              <Word className="mx-auto text-7xl" word={word.japanese} />
-              <SoundIcon className="mb-2 mr-2 self-end opacity-60" />
+              <Word className="mx-auto text-6xl mb-14" word={word.japanese} />
             </div>
           );
         })}
