@@ -11,8 +11,8 @@ export const ReverseIcon: VFC<Props> = (props) => {
       className={props.className}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      width="30"
-      height="30"
+      width="40"
+      height="40"
       viewBox="0 0 24 24"
       stroke="currentColor"
       onClick={props.onClick}
