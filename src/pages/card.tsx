@@ -28,7 +28,9 @@ const Card: NextPage = () => {
     }
   };
   const speakText = (text: string) => {
-    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "en-US";
+    speechSynthesis.speak(utter);
   };
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const Card: NextPage = () => {
           return isFront ? (
             <div
               key={word.english}
-              className="flex flex-col justify-between w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300"
+              className="flex flex-col justify-between mt-10 w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300 sm:mt-0"
             >
               <div className="flex justify-between">
                 <FlagIcon className="ml-2 mt-2 opacity-60 sm:hover:bg-gray-100 rounded-full p-1" />
@@ -85,7 +87,7 @@ const Card: NextPage = () => {
       </div>
 
       <Link href="/">
-        <button className="mx-auto mb-14 w-32 h-10 rounded-full shadow bg-green-300 hover:bg-green-400">
+        <button className="mx-auto mb-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
           ホームへ
         </button>
       </Link>
