@@ -3,7 +3,8 @@ import Link from "next/link";
 import { FlagIcon } from "src/components/card/FlagIcon";
 import { ReverseIcon } from "src/components/card/ReverseIcon";
 import { SoundIcon } from "src/components/card/SoundIcon";
-import { Word } from "src/components/card/word";
+import { Word } from "src/components/card/Word";
+import { LeftArrow, RightArrow } from "src/components/card/ArrowIcon";
 import SwipeableViews from "react-swipeable-views";
 import React, { useState, useEffect } from "react";
 
@@ -72,44 +73,8 @@ const Card: NextPage = () => {
         })}
       </SwipeableViews>
       <div className="mx-auto flex">
-        <button
-          className="mr-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
-          onClick={previousWord}
-        >
-          <svg
-            width={30}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M7 16l-4-4m0 0l4-4m-4 4h18"
-            />
-          </svg>
-        </button>
-        <button
-          className="ml-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
-          onClick={nextWord}
-        >
-          <svg
-            width={30}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </button>
+        <LeftArrow onClick={() => previousWord()} />
+        <RightArrow onClick={() => nextWord()} />
       </div>
 
       <Link href="/">
