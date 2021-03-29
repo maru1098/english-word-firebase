@@ -7,7 +7,7 @@ type Props = {
 export const LeftArrow: VFC<Props> = (props) => {
   return (
     <button
-      className="mr-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
+      className="hidden sm:inline-block mr-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500 "
       onClick={props.onClick}
     >
       <svg
@@ -32,7 +32,7 @@ export const LeftArrow: VFC<Props> = (props) => {
 export const RightArrow: VFC<Props> = (props) => {
   return (
     <button
-      className="ml-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
+      className="hidden sm:inline-block ml-10 px-10 rounded-full shadow bg-gray-400 hover:bg-gray-500"
       onClick={props.onClick}
     >
       <svg
