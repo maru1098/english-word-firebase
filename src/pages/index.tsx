@@ -1,11 +1,16 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { Layout } from "src/components/layout";
+import { useEffect, useState, useContext } from "react";
+import { useRouter } from "next/router";
+
+import { auth } from "src/utils/firebase";
+import { AuthContext } from "src/auth/AuthProvider";
 
 const PAGES = [
   {
-    href: "/signin",
-    file: "/siginin.tsx",
+    href: "/login",
+    file: "/login.tsx",
     label: "ログインページ",
     isDone: true,
   },
@@ -30,6 +35,20 @@ const PAGES = [
 ] as const;
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    currentUser === null && router.push("/login");
+  }, [currentUser]);
+  const logOut = async () => {
+    try {
+      await auth.signOut();
+      router.push("/login");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <Layout>
       <div className="p-4">
@@ -48,6 +67,10 @@ const Home: NextPage = () => {
             );
           })}
         </ul>
+      </div>
+      <div>
+        <pre>{currentUser && JSON.stringify(currentUser, null, 4)}</pre>
+        <button onClick={logOut}>Logout</button>
       </div>
     </Layout>
   );
