@@ -38,13 +38,13 @@ const Home: NextPage = () => {
   const router = useRouter();
   const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    currentUser === null && router.push("/login");
-  }, [currentUser]);
+  // useEffect(() => {
+  // currentUser === null && router.push("/login");
+  // }, [currentUser]);
   const logOut = async () => {
     try {
       await auth.signOut();
-      router.push("/login");
+      // router.push("/login");
     } catch (error) {
       alert(error.message);
     }
