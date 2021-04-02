@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import { FC, createContext, useEffect, useState } from "react";
-import { auth } from "../utils/firebase";
+import { auth } from "src/utils/firebase";
 
 type AuthContextProps = {
   currentUser: firebase.User | null | undefined;
@@ -20,7 +20,7 @@ const AuthProvider: FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser: currentUser }}>
       {children}
     </AuthContext.Provider>
   );
