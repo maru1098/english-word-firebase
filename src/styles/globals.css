@@ -1,5 +1,25 @@
 @tailwind base;
 
 @tailwind components;
-
+.wrapper {
+  @apply h-screen flex items-center justify-center flex-col;
+}
+.auth-btn {
+  @apply py-1 px-3 mt-4 rounded text-white bg-blue-400 border-blue-600 border-solid;
+}
+.auth-link {
+  @apply underline text-blue-800;
+}
+.auth-input {
+  @apply py-1 px-2 border border-gray-400 border-solid rounded;
+}
+.auth-label {
+  @apply inline-block w-20;
+}
 @tailwind utilities;
+
+@layer utilities {
+  .ios-height {
+    height: -webkit-fill-available;
+  }
+}
