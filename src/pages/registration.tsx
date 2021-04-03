@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { db } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
+import firebase from "firebase";
 
 const Registration = () => {
   const { currentUser } = useContext(AuthContext);
   const [english, setEnglish] = useState<string>("");
   const [japanese, setJapanese] = useState<string>("");
   const [folder, setFolder] = useState<string>("");
+  const [currentData, setCurrentData] = useState<string[]>([]);
   const englishRef: React.RefObject<HTMLInputElement> = useRef();
   const japaneseRef: React.RefObject<HTMLInputElement> = useRef();
+
+  const folderRef = db.collection("user").doc(currentUser.uid);
+
   const createUser = async () => {
     try {
       await db
@@ -21,6 +26,15 @@ const Registration = () => {
           japanese: japanese,
           isFlag: false,
         });
+      if ((await folderRef.get()).exists) {
+        await folderRef.update({
+          folder: firebase.firestore.FieldValue.arrayUnion(folder),
+        });
+      } else {
+        folderRef.set({
+          folder: [folder],
+        });
+      }
       alert(`${english}が登録されました`);
       englishRef.current.value = "";
       japaneseRef.current.value = "";
@@ -29,10 +43,14 @@ const Registration = () => {
     }
   };
 
+  const getList = async () => {
+    const folders = await folderRef.get();
+    setCurrentData(folders.data().folder);
+  };
+
   return (
     <div className="ios-height flex flex-col justify-between sm:min-h-screen">
       <h1 className="mx-auto">単語登録ページ</h1>
-
       <div className="mx-auto">
         <label htmlFor="folder" className="">
           単語帳名:
@@ -74,6 +92,17 @@ const Registration = () => {
       <button className="mx-auto w-32 bg-blue-300" onClick={() => createUser()}>
         登録
       </button>
+      <button
+        className="mx-auto w-32 bg-blue-300"
+        onClick={() => {
+          getList();
+        }}
+      >
+        フォルダーを表示
+      </button>
+      {currentData.map((val, i) => {
+        return <li key={i}>{val}</li>;
+      })}
       <Link href="/">
         <button className="mx-auto mb-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
           ホームへ

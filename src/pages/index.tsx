@@ -32,6 +32,12 @@ const PAGES = [
     label: "問題出題ページ",
     isDone: false,
   },
+  {
+    href: "/select",
+    file: "/select.tsx",
+    label: "単語帳選択ページ",
+    isDone: false,
+  },
 ] as const;
 
 const Home: NextPage = () => {
