@@ -23,16 +23,19 @@ export const registWord = async (uid, folder, english, japanese) => {
 };
 
 export const getList = async (uid) => {
-  console.log("get!");
   const folderRef = db.collection("user").doc(uid);
   const folders = await folderRef.get();
   return folders.data().folder;
 };
 
+export const wordSet: { [key: string]: { [key: string]: string } } = {};
+
 export const setWord = async (uid, folder) => {
+  for (let key in wordSet) {
+    delete wordSet[key];
+  }
   const wordRef = db.collection("user").doc(uid).collection(folder);
   const wordData = await wordRef.get();
-  const wordSet = {};
   wordData.forEach((doc) => {
     wordSet[doc.id] = doc.data();
   });

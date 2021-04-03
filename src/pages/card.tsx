@@ -7,23 +7,20 @@ import { Word } from "src/components/card/Word";
 import { LeftArrow, RightArrow } from "src/components/card/ArrowIcon";
 import SwipeableViews from "react-swipeable-views";
 import React, { useState, useEffect } from "react";
-
-const words = [
-  { english: "word", japanese: "単語" },
-  { english: "test", japanese: "試験" },
-  { english: "apple", japanese: "りんご" },
-];
+import { wordSet } from "src/db/DbProvider";
 
 const Card: NextPage = () => {
   const [index, setIndex] = useState(0);
   const [isFront, setIsFront] = useState(true);
+  const [getWord, setGetWord] = useState({});
+  const english = Object.keys(getWord);
   const previousWord = () => {
     if (index !== 0) {
       setIndex(index - 1);
     }
   };
   const nextWord = () => {
-    if (index < words.length - 1) {
+    if (index < english.length - 1) {
       setIndex(index + 1);
     }
   };
@@ -36,6 +33,10 @@ const Card: NextPage = () => {
   useEffect(() => {
     setIsFront(true);
   }, [index]);
+
+  useEffect(() => {
+    setGetWord(wordSet);
+  }, []);
   return (
     <div className="ios-height flex flex-col justify-between bg-gray-100 sm:min-h-screen">
       <h1 className="mx-auto mt-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
@@ -45,10 +46,10 @@ const Card: NextPage = () => {
         index={index}
         onChangeIndex={(index: number) => setIndex(index)}
       >
-        {words.map((word) => {
+        {english.map((word, i) => {
           return isFront ? (
             <div
-              key={word.english}
+              key={i}
               className="flex flex-col justify-between mt-10 w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300 sm:mt-0"
             >
               <div className="flex justify-between">
@@ -58,15 +59,15 @@ const Card: NextPage = () => {
                   onClick={() => setIsFront(false)}
                 />
               </div>
-              <Word className="mx-auto text-7xl" word={word.english} />
+              <Word className="mx-auto text-7xl" word={word} />
               <SoundIcon
                 className="mb-2 mr-2 self-end opacity-60 sm:hover:bg-gray-100 rounded-full p-1"
-                onClick={() => speakText(word.english)}
+                onClick={() => speakText(word)}
               />
             </div>
           ) : (
             <div
-              key={word.japanese}
+              key={i}
               className="flex flex-col justify-between mt-10 w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300 sm:mt-0"
             >
               <div className="flex justify-between">
@@ -76,7 +77,10 @@ const Card: NextPage = () => {
                   onClick={() => setIsFront(true)}
                 />
               </div>
-              <Word className="mx-auto text-6xl mb-14" word={word.japanese} />
+              <Word
+                className="mx-auto text-6xl mb-14"
+                word={wordSet[english[i]].japanese}
+              />
             </div>
           );
         })}

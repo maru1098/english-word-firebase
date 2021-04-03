@@ -2,8 +2,10 @@ import Link from "next/link";
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import { getList, setWord } from "src/db/DbProvider";
+import { Router, useRouter } from "next/router";
 
 const Select = () => {
+  const router = useRouter();
   const { currentUser } = useContext(AuthContext);
   const [folder, setFolder] = useState<string[]>([]);
 
@@ -24,6 +26,7 @@ const Select = () => {
               key={i}
               onClick={async () => {
                 await setWord(currentUser.uid, val);
+                router.push("/card");
               }}
             >
               {val}
