@@ -100,9 +100,11 @@ const Registration = () => {
       >
         フォルダーを表示
       </button>
-      {currentData.map((val, i) => {
-        return <li key={i}>{val}</li>;
-      })}
+      <ul>
+        {currentData.map((val, i) => {
+          return <li key={i}>{val}</li>;
+        })}
+      </ul>
       <Link href="/">
         <button className="mx-auto mb-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
           ホームへ
