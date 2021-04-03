@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { db } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
-import { useContext, useState, useRef, useEffect } from "react";
-import firebase from "firebase";
+import { useContext, useState, useRef } from "react";
+import { registWord, getList } from "src/db/DbProvider";
 
 const Registration = () => {
   const { currentUser } = useContext(AuthContext);
@@ -13,39 +12,11 @@ const Registration = () => {
   const englishRef: React.RefObject<HTMLInputElement> = useRef();
   const japaneseRef: React.RefObject<HTMLInputElement> = useRef();
 
-  const folderRef = db.collection("user").doc(currentUser.uid);
-
   const createUser = async () => {
-    try {
-      await db
-        .collection("user")
-        .doc(currentUser.uid)
-        .collection(folder)
-        .doc(english)
-        .set({
-          japanese: japanese,
-          isFlag: false,
-        });
-      if ((await folderRef.get()).exists) {
-        await folderRef.update({
-          folder: firebase.firestore.FieldValue.arrayUnion(folder),
-        });
-      } else {
-        folderRef.set({
-          folder: [folder],
-        });
-      }
-      alert(`${english}が登録されました`);
-      englishRef.current.value = "";
-      japaneseRef.current.value = "";
-    } catch (err) {
-      alert(err.message);
-    }
-  };
-
-  const getList = async () => {
-    const folders = await folderRef.get();
-    setCurrentData(folders.data().folder);
+    await registWord(currentUser.uid, folder, english, japanese);
+    alert(`${english}が登録されました`);
+    englishRef.current.value = "";
+    japaneseRef.current.value = "";
   };
 
   return (
@@ -94,8 +65,8 @@ const Registration = () => {
       </button>
       <button
         className="mx-auto w-32 bg-blue-300"
-        onClick={() => {
-          getList();
+        onClick={async () => {
+          setCurrentData(await getList(currentUser.uid));
         }}
       >
         フォルダーを表示

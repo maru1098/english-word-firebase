@@ -1,30 +1,17 @@
 import Link from "next/link";
-import { db } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useEffect, useState } from "react";
+import { getList, setWord } from "src/db/DbProvider";
 
 const Select = () => {
   const { currentUser } = useContext(AuthContext);
   const [folder, setFolder] = useState<string[]>([]);
-  const folderRef = db.collection("user").doc(currentUser.uid);
-
-  const setWord = async (val: string) => {
-    const wordList = await folderRef.collection(val).get();
-    const dataSet = {};
-    wordList.forEach((doc) => {
-      dataSet[doc.id] = doc.data();
-    });
-    console.log(dataSet);
-  };
 
   useEffect(() => {
-    console.log("test");
-    const getData = async () => {
-      const data = await folderRef.get();
-      setFolder(data.data().folder as string[]);
-      console.log(data.data());
+    const getFolder = async () => {
+      setFolder(await getList(currentUser.uid));
     };
-    getData();
+    getFolder();
   }, []);
 
   return (
@@ -35,8 +22,8 @@ const Select = () => {
           return (
             <li
               key={i}
-              onClick={() => {
-                setWord(val);
+              onClick={async () => {
+                await setWord(currentUser.uid, val);
               }}
             >
               {val}
