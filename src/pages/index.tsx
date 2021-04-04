@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { Layout } from "src/components/layout";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 
 import { auth } from "src/utils/firebase";
@@ -32,19 +32,25 @@ const PAGES = [
     label: "問題出題ページ",
     isDone: false,
   },
+  {
+    href: "/select",
+    file: "/select.tsx",
+    label: "単語帳選択ページ",
+    isDone: false,
+  },
 ] as const;
 
 const Home: NextPage = () => {
   const router = useRouter();
   const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    currentUser === null && router.push("/login");
-  }, [currentUser]);
+  // useEffect(() => {
+  // currentUser === null && router.push("/login");
+  // }, [currentUser]);
   const logOut = async () => {
     try {
       await auth.signOut();
-      router.push("/login");
+      // router.push("/login");
     } catch (error) {
       alert(error.message);
     }

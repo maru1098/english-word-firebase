@@ -2,7 +2,7 @@ import type { VFC } from "react";
 
 type Props = {
   className?: string;
-  word?: string;
+  word?: any;
 };
 
 export const Word: VFC<Props> = (props) => {
