@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import { getList, setWord } from "src/db/DbProvider";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const Select = () => {
   const router = useRouter();

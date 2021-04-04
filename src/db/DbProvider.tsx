@@ -1,5 +1,5 @@
 import { db } from "src/utils/firebase";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 export const registWord = async (uid, folder, english, japanese) => {
   const folderRef = db.collection("user").doc(uid);

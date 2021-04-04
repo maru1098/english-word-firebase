@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { Layout } from "src/components/layout";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 
 import { auth } from "src/utils/firebase";
