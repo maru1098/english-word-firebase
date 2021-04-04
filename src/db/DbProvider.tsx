@@ -23,21 +23,34 @@ export const registWord = async (uid, folder, english, japanese) => {
 };
 
 export const getList = async (uid) => {
-  const folderRef = db.collection("user").doc(uid);
-  const folders = await folderRef.get();
+  const userRef = db.collection("user").doc(uid);
+  const folders = await userRef.get();
   return folders.data().folder;
 };
 
-export const wordSet: { [key: string]: { [key: string]: string } } = {};
-
 export const setWord = async (uid, folder) => {
-  for (let key in wordSet) {
-    delete wordSet[key];
-  }
-  const wordRef = db.collection("user").doc(uid).collection(folder);
-  const wordData = await wordRef.get();
-  wordData.forEach((doc) => {
+  const wordSet: {
+    [key: string]: { [key: string]: string | boolean };
+  } = {};
+  const folderRef = db.collection("user").doc(uid).collection(folder);
+  const words = await folderRef.get();
+  words.forEach((doc) => {
     wordSet[doc.id] = doc.data();
   });
-  console.log(wordSet);
+  return wordSet;
+};
+
+export const setFlag = async (uid, folder, english, isFlag) => {
+  const wordRef = db
+    .collection("user")
+    .doc(uid)
+    .collection(folder)
+    .doc(english);
+  try {
+    await wordRef.update({
+      flag: isFlag,
+    });
+  } catch (err) {
+    alert(err.message);
+  }
 };

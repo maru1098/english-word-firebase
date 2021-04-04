@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useEffect, useState } from "react";
-import { getList, setWord } from "src/db/DbProvider";
+import { getList } from "src/db/DbProvider";
 import { useRouter } from "next/router";
 
 const Select = () => {
@@ -25,8 +25,10 @@ const Select = () => {
             <li
               key={i}
               onClick={async () => {
-                await setWord(currentUser.uid, val);
-                router.push("/card");
+                router.push({
+                  pathname: "/card",
+                  query: { folder: val },
+                });
               }}
             >
               {val}

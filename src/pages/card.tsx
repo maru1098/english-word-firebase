@@ -3,27 +3,37 @@ import Link from "next/link";
 import { CardLayout } from "src/components/card/CardLayout";
 import { LeftArrow, RightArrow } from "src/components/card/ArrowIcon";
 import SwipeableViews from "react-swipeable-views";
-import React, { useState, useEffect } from "react";
-import { wordSet } from "src/db/DbProvider";
+import { useContext, useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { setWord } from "src/db/DbProvider";
+import { AuthContext } from "src/auth/AuthProvider";
 
 const Card: NextPage = () => {
+  const { currentUser } = useContext(AuthContext);
+  const router = useRouter();
   const [index, setIndex] = useState<number>(0);
-  const [getWord, setGetWord] = useState({});
-  const english = Object.keys(getWord);
+  const [wordData, setWordData] = useState<{
+    [key: string]: { [key: string]: string | boolean };
+  }>({});
+  const wordsKey = Object.keys(wordData);
   const previousWord = () => {
     if (index !== 0) {
       setIndex(index - 1);
     }
   };
   const nextWord = () => {
-    if (index < english.length - 1) {
+    if (index < wordsKey.length - 1) {
       setIndex(index + 1);
     }
   };
 
   useEffect(() => {
-    setGetWord(wordSet);
+    const getWord = async () => {
+      setWordData(await setWord(currentUser.uid, router.query.folder));
+    };
+    getWord();
   }, []);
+
   return (
     <div className="ios-height flex flex-col justify-between bg-gray-100 sm:min-h-screen">
       <h1 className="mx-auto mt-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
@@ -33,14 +43,14 @@ const Card: NextPage = () => {
         index={index}
         onChangeIndex={(index: number) => setIndex(index)}
       >
-        {english.map((word, i) => {
+        {wordsKey.map((english, i) => {
           return (
             <CardLayout
               key={i}
               index={index}
-              getWord={getWord}
-              english={word}
-              japanese={wordSet[english[i]].japanese}
+              english={english}
+              japanese={wordData[wordsKey[i]].japanese as string}
+              flag={wordData[wordsKey[i]].isFlag as boolean}
             />
           );
         })}

@@ -2,19 +2,23 @@ import { FlagIcon } from "src/components/card/FlagIcon";
 import { ReverseIcon } from "src/components/card/ReverseIcon";
 import { Word } from "src/components/card/Word";
 import { SoundIcon } from "src/components/card/SoundIcon";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import type { VFC } from "react";
 import clsx from "clsx";
+import { AuthContext } from "src/auth/AuthProvider";
+import { setFlag } from "src/db/DbProvider";
 
 type Props = {
-  getWord: { [key: string]: { [key: string]: string } };
   index: number;
   english: string;
   japanese: string;
+  flag: boolean;
 };
 
 export const CardLayout: VFC<Props> = (props) => {
+  const { currentUser } = useContext(AuthContext);
   const [isFront, setIsFront] = useState(true);
+  const [isFlag, setIsFlag] = useState(props.flag);
   const speakText = (text: string) => {
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "en-US";
@@ -28,9 +32,10 @@ export const CardLayout: VFC<Props> = (props) => {
       <div className="flex justify-between">
         <FlagIcon
           className="ml-2 mt-2 opacity-60 sm:hover:bg-gray-100 rounded-full p-1 "
-          isFlag={false}
+          isFlag={isFlag}
           onClick={() => {
-            console.log("test");
+            isFlag ? setIsFlag(false) : setIsFlag(true);
+            // setFlag(currentUser.uid, folder, props.english, isFlag)
           }}
         />
         <ReverseIcon
