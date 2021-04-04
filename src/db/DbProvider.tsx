@@ -48,7 +48,7 @@ export const setFlag = async (uid, folder, english, isFlag) => {
     .doc(english);
   try {
     await wordRef.update({
-      flag: isFlag,
+      isFlag: isFlag,
     });
   } catch (err) {
     alert(err.message);

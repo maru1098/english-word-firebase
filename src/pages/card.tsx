@@ -51,6 +51,7 @@ const Card: NextPage = () => {
               english={english}
               japanese={wordData[wordsKey[i]].japanese as string}
               flag={wordData[wordsKey[i]].isFlag as boolean}
+              folder={router.query.folder as string}
             />
           );
         })}

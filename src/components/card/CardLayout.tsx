@@ -2,7 +2,7 @@ import { FlagIcon } from "src/components/card/FlagIcon";
 import { ReverseIcon } from "src/components/card/ReverseIcon";
 import { Word } from "src/components/card/Word";
 import { SoundIcon } from "src/components/card/SoundIcon";
-import { useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import type { VFC } from "react";
 import clsx from "clsx";
 import { AuthContext } from "src/auth/AuthProvider";
@@ -13,9 +13,11 @@ type Props = {
   english: string;
   japanese: string;
   flag: boolean;
+  folder: string;
 };
 
 export const CardLayout: VFC<Props> = (props) => {
+  const isFirstRender = useRef(false);
   const { currentUser } = useContext(AuthContext);
   const [isFront, setIsFront] = useState(true);
   const [isFlag, setIsFlag] = useState(props.flag);
@@ -25,8 +27,16 @@ export const CardLayout: VFC<Props> = (props) => {
     speechSynthesis.speak(utter);
   };
   useEffect(() => {
+    isFirstRender.current = true;
+  }, []);
+  useEffect(() => {
     setIsFront(true);
   }, [props.index]);
+  useEffect(() => {
+    isFirstRender.current
+      ? (isFirstRender.current = false)
+      : setFlag(currentUser.uid, props.folder, props.english, isFlag);
+  }, [isFlag]);
   return (
     <div className="flex flex-col justify-between mt-10 w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300 sm:mt-0">
       <div className="flex justify-between">
@@ -35,7 +45,6 @@ export const CardLayout: VFC<Props> = (props) => {
           isFlag={isFlag}
           onClick={() => {
             isFlag ? setIsFlag(false) : setIsFlag(true);
-            // setFlag(currentUser.uid, folder, props.english, isFlag)
           }}
         />
         <ReverseIcon
@@ -53,6 +62,8 @@ export const CardLayout: VFC<Props> = (props) => {
           onClick={() => speakText(props.english)}
         />
       )}
+      {console.log(props.flag)}
+      {console.log(props.japanese)}
     </div>
   );
 };
