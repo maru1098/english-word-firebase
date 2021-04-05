@@ -29,10 +29,12 @@ const Card: NextPage = () => {
 
   useEffect(() => {
     const getWord = async () => {
-      setWordData(await setWord(currentUser.uid, router.query.folder));
+      if (currentUser) {
+        setWordData(await setWord(currentUser.uid, router.query.folder));
+      }
     };
     getWord();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className="ios-height flex flex-col justify-between bg-gray-100 sm:min-h-screen">

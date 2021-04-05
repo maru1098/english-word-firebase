@@ -11,15 +11,17 @@ const Select = () => {
 
   useEffect(() => {
     const getFolder = async () => {
-      setFolder(await getList(currentUser.uid));
+      if (currentUser) {
+        setFolder(await getList(currentUser.uid));
+      }
     };
     getFolder();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div>
       <h1>単語帳選択ページ</h1>
-      <ul>
+      <ul className="list-disc">
         {folder.map((val, i) => {
           return (
             <li
