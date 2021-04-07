@@ -36,7 +36,7 @@ const PAGES = [
     href: "/select",
     file: "/select.tsx",
     label: "単語帳選択ページ",
-    isDone: false,
+    isDone: true,
   },
 ] as const;
 
