@@ -1,5 +1,6 @@
 import React, { useEffect, useState, FC, useContext } from "react";
 import Link from "next/link";
+import { Layout } from "src/components/layout";
 import { useRouter } from "next/router";
 
 import { auth } from "src/utils/firebase";
@@ -25,7 +26,7 @@ const Login: FC = () => {
   };
 
   return (
-    <div className="ios-height flex flex-col justify-center items-center bg-gray-200 sm:min-h-screen">
+    <Layout>
       <label htmlFor="email" className="mb-1 text-2xl ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +84,7 @@ const Login: FC = () => {
       <Link href="/signup">
         <a className="underline text-blue-800">初めての方はこちら</a>
       </Link>
-    </div>
+    </Layout>
   );
 };
 

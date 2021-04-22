@@ -8,18 +8,6 @@ import { auth } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
 
 const PAGES = [
-  // {
-  //   href: "/login",
-  //   file: "/login.tsx",
-  //   label: "ログインページ",
-  //   isDone: true,
-  // },
-  // {
-  //   href: "/card",
-  //   file: "card.tsx",
-  //   label: "単語カード",
-  //   isDone: false,
-  // },
   {
     href: "/registration",
     file: "/registration.tsx",
