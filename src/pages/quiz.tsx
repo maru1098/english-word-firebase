@@ -1,14 +1,11 @@
-import Link from "next/link";
+import { Layout } from "src/components/layout";
+import { Title } from "src/components/Title";
+
 const Quiz = () => {
   return (
-    <div>
-      <h1>問題出題ページ</h1>
-      <Link href="/">
-        <button className="mx-auto mb-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
-          ホームへ
-        </button>
-      </Link>
-    </div>
+    <Layout>
+      <Title>問題出題</Title>
+    </Layout>
   );
 };
 
