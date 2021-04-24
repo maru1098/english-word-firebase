@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { auth } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
 import { Button } from "src/components/Button";
+import { Title } from "src/components/Title";
 
 const PAGES = [
   {
@@ -41,15 +42,13 @@ const Home: NextPage = () => {
   };
   return (
     <Layout>
-      <h1 className="mt-5 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
-        メニュー
-      </h1>
-      <ul className="mt-2">
+      <Title>メニュー</Title>
+      <ul className="grid grid-rows-3 gap-4">
         {PAGES.map((page) => {
           return (
             <li key={page.href}>
               <Link href={page.href}>
-                <a className="block m-5 py-5 px-20 border-4 text-center bg-gray-100 border-green-300 sm:hover:bg-green-200">
+                <a className="block py-5 px-20 border-4 text-center bg-gray-100 border-green-300 sm:hover:bg-green-200">
                   <div className="text-xl">{`${page.label}`}</div>
                 </a>
               </Link>

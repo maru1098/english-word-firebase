@@ -2,6 +2,8 @@ import Link from "next/link";
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useState, useRef } from "react";
 import { registWord, getList } from "src/db/DbProvider";
+import { Layout } from "src/components/layout";
+import { Title } from "src/components/Title";
 
 const Registration = () => {
   const { currentUser } = useContext(AuthContext);
@@ -20,8 +22,8 @@ const Registration = () => {
   };
 
   return (
-    <div className="ios-height flex flex-col justify-between sm:min-h-screen">
-      <h1 className="mx-auto">単語登録ページ</h1>
+    <Layout>
+      <Title>単語登録</Title>
       <div className="mx-auto">
         <label htmlFor="folder" className="">
           単語帳名:
@@ -81,7 +83,7 @@ const Registration = () => {
           ホームへ
         </button>
       </Link>
-    </div>
+    </Layout>
   );
 };
 

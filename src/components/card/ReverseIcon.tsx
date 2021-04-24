@@ -8,11 +8,9 @@ type Props = {
 export const ReverseIcon: VFC<Props> = (props) => {
   return (
     <svg
-      className={props.className}
+      className={`w-10 h-10 ${props.className}`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      width="40"
-      height="40"
       viewBox="0 0 24 24"
       stroke="currentColor"
       onClick={props.onClick}

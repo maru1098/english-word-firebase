@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import { getList } from "src/db/DbProvider";
 import { useRouter } from "next/router";
 import { Layout } from "src/components/layout";
+import { Title } from "src/components/Title";
 
 const Select = () => {
   const router = useRouter();
@@ -21,10 +21,8 @@ const Select = () => {
 
   return (
     <Layout>
-      <h1 className="mx-auto my-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
-        単語帳選択
-      </h1>
-      <ul className="mx-auto ">
+      <Title>単語帳選択</Title>
+      <ul>
         {folder.map((val, i) => {
           return (
             <li
@@ -42,11 +40,6 @@ const Select = () => {
           );
         })}
       </ul>
-      <Link href="/">
-        <button className="mx-auto my-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
-          ホームへ
-        </button>
-      </Link>
     </Layout>
   );
 };

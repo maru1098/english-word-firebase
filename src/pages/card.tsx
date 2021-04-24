@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Link from "next/link";
 import { CardLayout } from "src/components/card/CardLayout";
 import { LeftArrow, RightArrow } from "src/components/card/ArrowIcon";
 import SwipeableViews from "react-swipeable-views";
@@ -8,6 +7,7 @@ import { useRouter } from "next/router";
 import { setWord } from "src/db/DbProvider";
 import { AuthContext } from "src/auth/AuthProvider";
 import { Layout } from "src/components/layout";
+import { Title } from "src/components/Title";
 
 const Card: NextPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -38,37 +38,32 @@ const Card: NextPage = () => {
   }, [currentUser]);
 
   return (
-    <Layout>
-      <h1 className="mt-5 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
-        単語カード
-      </h1>
-      <SwipeableViews
-        index={index}
-        onChangeIndex={(index: number) => setIndex(index)}
-      >
-        {wordsKey.map((english, i) => {
-          return (
-            <CardLayout
-              key={i}
-              index={index}
-              english={english}
-              japanese={wordData[wordsKey[i]].japanese as string}
-              flag={wordData[wordsKey[i]].isFlag as boolean}
-              folder={router.query.folder as string}
-            />
-          );
-        })}
-      </SwipeableViews>
-      <div className="m-5 sm:m-10 ">
+    <Layout className="justify-between">
+      <Title>単語カード</Title>
+      <div className="grid grid-cols-7 sm:grid-cols-4">
+        <SwipeableViews
+          className="h-48 col-start-2 col-end-7 sm:col-end-4"
+          index={index}
+          onChangeIndex={(index: number) => setIndex(index)}
+        >
+          {wordsKey.map((english, i) => {
+            return (
+              <CardLayout
+                key={i}
+                index={index}
+                english={english}
+                japanese={wordData[wordsKey[i]].japanese as string}
+                flag={wordData[wordsKey[i]].isFlag as boolean}
+                folder={router.query.folder as string}
+              />
+            );
+          })}
+        </SwipeableViews>
+      </div>
+      <div className="m-14">
         <LeftArrow onClick={() => previousWord()} />
         <RightArrow onClick={() => nextWord()} />
       </div>
-
-      <Link href="/">
-        <button className="mb-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
-          ホームへ
-        </button>
-      </Link>
     </Layout>
   );
 };
