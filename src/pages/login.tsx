@@ -27,8 +27,8 @@ const Login: FC = () => {
   };
 
   return (
-    <Layout>
-      <label htmlFor="email" className="mb-1 text-2xl ">
+    <Layout className="justify-center">
+      <label htmlFor="email" className=" mb-1 text-2xl ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 mr-2 inline-block"
@@ -52,7 +52,7 @@ const Login: FC = () => {
         placeholder="メールアドレス"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <label htmlFor="password" className="mt-5 mb-1 text-2xl">
+      <label htmlFor="password" className="row-start-5 mt-5 mb-1 text-2xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 mr-2 inline-block"

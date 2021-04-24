@@ -25,7 +25,7 @@ const SignUp: FC = () => {
     }
   };
   return (
-    <Layout>
+    <Layout className="justify-center">
       <label htmlFor="email" className="mb-2 text-2xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
