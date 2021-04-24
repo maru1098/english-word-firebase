@@ -7,7 +7,7 @@ type Props = {
 export const Layout: FC<Props> = (props) => {
   return (
     <div
-      className={`${props.className} ios-height flex flex-col items-center bg-gray-200 dark:bg-gray-700 sm:min-h-screen`}
+      className={`${props.className} ios-height flex flex-col items-center bg-gray-200 dark:bg-gray-700`}
     >
       {props.children}
     </div>

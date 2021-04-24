@@ -5,9 +5,8 @@
 @tailwind utilities;
 
 @layer utilities {
-  @supports (-webkit-touch-callout: none) {
-    .ios-height {
-      min-height: -webkit-fill-available;
-    }
+  /* iosのsafariにも対応できるmin-height */
+  .ios-height {
+    min-height: calc(var(--vh, 1vh) * 100);
   }
 }
