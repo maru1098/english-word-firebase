@@ -1,11 +1,15 @@
-import type { ReactNode } from "react";
+import React, { FC } from "react";
 
-export const Layout = (props: { children: ReactNode }) => {
+type Props = {
+  className?: string;
+};
+
+export const Layout: FC<Props> = (props) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-1 bg-gray-200 dark:bg-gray-700">
-        {props.children}
-      </main>
+    <div
+      className={`${props.className} ios-height flex flex-col items-center bg-gray-200 dark:bg-gray-700 sm:min-h-screen`}
+    >
+      {props.children}
     </div>
   );
 };
