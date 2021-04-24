@@ -1,9 +1,11 @@
 import React, { useEffect, useState, FC, useContext } from "react";
 import Link from "next/link";
+import { Layout } from "src/components/layout";
 import { useRouter } from "next/router";
 
 import { auth } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
+import { Button } from "src/components/Button";
 
 const Login: FC = () => {
   const router = useRouter();
@@ -25,7 +27,7 @@ const Login: FC = () => {
   };
 
   return (
-    <div className="ios-height flex flex-col justify-center items-center bg-gray-200 sm:min-h-screen">
+    <Layout>
       <label htmlFor="email" className="mb-1 text-2xl ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -74,16 +76,11 @@ const Login: FC = () => {
         placeholder="パスワード"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button
-        className="my-10 w-32 h-10 rounded-full shadow font-bold text-lg italic bg-green-300 sm:hover:bg-green-400"
-        onClick={logIn}
-      >
-        Login
-      </button>
+      <Button onClick={logIn}>Login</Button>
       <Link href="/signup">
         <a className="underline text-blue-800">初めての方はこちら</a>
       </Link>
-    </div>
+    </Layout>
   );
 };
 

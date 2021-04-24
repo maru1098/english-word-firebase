@@ -1,6 +1,7 @@
 import { FC, useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Layout } from "src/components/layout";
 
 import { auth } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
@@ -24,7 +25,7 @@ const SignUp: FC = () => {
     }
   };
   return (
-    <div className="ios-height flex flex-col justify-center items-center bg-gray-200 sm:min-h-screen">
+    <Layout>
       <label htmlFor="email" className="mb-2 text-2xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +85,7 @@ const SignUp: FC = () => {
           アカウントをお持ちの方はこちら
         </a>
       </Link>
-    </div>
+    </Layout>
   );
 };
 

@@ -38,7 +38,7 @@ export const CardLayout: VFC<Props> = (props) => {
       : setFlag(currentUser.uid, props.folder, props.english, isFlag);
   }, [isFlag]);
   return (
-    <div className="flex flex-col justify-between mt-10 w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300 sm:mt-0">
+    <div className="flex flex-col justify-between mt-10 w-80 h-48 mx-auto rounded border-b-2 border-r-2 border-gray-400 bg-gray-300 ">
       <div className="flex justify-between">
         <FlagIcon
           className="ml-2 mt-2 opacity-60 sm:hover:bg-gray-100 rounded-full p-1 "

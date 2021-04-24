@@ -6,37 +6,20 @@ import { useRouter } from "next/router";
 
 import { auth } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
+import { Button } from "src/components/Button";
 
 const PAGES = [
-  // {
-  //   href: "/login",
-  //   file: "/login.tsx",
-  //   label: "ログインページ",
-  //   isDone: true,
-  // },
-  // {
-  //   href: "/card",
-  //   file: "card.tsx",
-  //   label: "単語カード",
-  //   isDone: false,
-  // },
   {
     href: "/registration",
-    file: "/registration.tsx",
-    label: "単語登録ページ",
-    isDone: false,
-  },
-  {
-    href: "/quiz",
-    file: "/quiz.tsx",
-    label: "問題出題ページ",
-    isDone: false,
+    label: "単語登録",
   },
   {
     href: "/select",
-    file: "/select.tsx",
-    label: "単語帳選択ページ",
-    isDone: true,
+    label: "単語帳を選ぶ",
+  },
+  {
+    href: "/quiz",
+    label: "問題を解く",
   },
 ] as const;
 
@@ -58,27 +41,23 @@ const Home: NextPage = () => {
   };
   return (
     <Layout>
-      <div className="p-4">
-        <h2>ページ一覧</h2>
-        <ul className="mt-2 grid gap-4 grid-flow-row sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {PAGES.map((page) => {
-            return (
-              <li key={page.href}>
-                <Link href={page.href}>
-                  <a className="block p-3 border border-black">
-                    <div>{`${page.isDone ? "✅" : ""}${page.label}`}</div>
-                    <div>pages{page.file}のページです</div>
-                  </a>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div>
-        {/* <pre>{currentUser && JSON.stringify(currentUser, null, 4)}</pre> */}
-        <button onClick={logOut}>Logout</button>
-      </div>
+      <h1 className="mt-5 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
+        メニュー
+      </h1>
+      <ul className="mt-2">
+        {PAGES.map((page) => {
+          return (
+            <li key={page.href}>
+              <Link href={page.href}>
+                <a className="block m-5 py-5 px-20 border-4 text-center bg-gray-100 border-green-300 sm:hover:bg-green-200">
+                  <div className="text-xl">{`${page.label}`}</div>
+                </a>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <Button onClick={logOut}>Logout</Button>
     </Layout>
   );
 };

@@ -3,6 +3,7 @@ import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import { getList } from "src/db/DbProvider";
 import { useRouter } from "next/router";
+import { Layout } from "src/components/layout";
 
 const Select = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const Select = () => {
   }, [currentUser]);
 
   return (
-    <div className="flex flex-col justify-between bg-gray-100 ">
+    <Layout>
       <h1 className="mx-auto my-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
         単語帳選択
       </h1>
@@ -28,7 +29,7 @@ const Select = () => {
           return (
             <li
               key={i}
-              className=" px-24 py-14 h-10 text-center text-3xl flex flex-col justify-center border border-b border-gray-500 bg-gray-300 sm:cursor-pointer hover:bg-gray-200"
+              className="px-24 py-14 h-10 text-center text-3xl flex flex-col justify-center border border-b border-gray-500 bg-gray-300 sm:cursor-pointer sm:hover:bg-gray-100"
               onClick={async () => {
                 router.push({
                   pathname: "/card",
@@ -46,7 +47,7 @@ const Select = () => {
           ホームへ
         </button>
       </Link>
-    </div>
+    </Layout>
   );
 };
 

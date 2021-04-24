@@ -7,6 +7,7 @@ import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { setWord } from "src/db/DbProvider";
 import { AuthContext } from "src/auth/AuthProvider";
+import { Layout } from "src/components/layout";
 
 const Card: NextPage = () => {
   const { currentUser } = useContext(AuthContext);
@@ -37,8 +38,8 @@ const Card: NextPage = () => {
   }, [currentUser]);
 
   return (
-    <div className="ios-height flex flex-col justify-between bg-gray-100 sm:min-h-screen">
-      <h1 className="mx-auto mt-10 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
+    <Layout>
+      <h1 className="mt-5 px-20 py-3 border-4 border-green-500 text-3xl bg-green-300">
         単語カード
       </h1>
       <SwipeableViews
@@ -58,17 +59,17 @@ const Card: NextPage = () => {
           );
         })}
       </SwipeableViews>
-      <div className="mx-auto flex">
+      <div className="m-5 sm:m-10 ">
         <LeftArrow onClick={() => previousWord()} />
         <RightArrow onClick={() => nextWord()} />
       </div>
 
       <Link href="/">
-        <button className="mx-auto mb-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
+        <button className="mb-14 w-32 h-10 rounded-full shadow bg-green-300 sm:hover:bg-green-400">
           ホームへ
         </button>
       </Link>
-    </div>
+    </Layout>
   );
 };
 
