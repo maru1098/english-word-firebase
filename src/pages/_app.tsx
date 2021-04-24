@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "src/styles/globals.css";
 import { AuthProvider } from "src/auth/AuthProvider";
 
 const setFillHeight = () => {
@@ -7,8 +7,9 @@ const setFillHeight = () => {
 };
 
 function MyApp({ Component, pageProps }) {
-  window.addEventListener("resize", setFillHeight);
-  setFillHeight();
+  if (typeof window !== "undefined") {
+    setFillHeight();
+  }
   return (
     <AuthProvider>
       <Component {...pageProps} />
