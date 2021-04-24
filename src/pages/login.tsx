@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import { auth } from "src/utils/firebase";
 import { AuthContext } from "src/auth/AuthProvider";
+import { Button } from "src/components/Button";
 
 const Login: FC = () => {
   const router = useRouter();
@@ -75,12 +76,7 @@ const Login: FC = () => {
         placeholder="パスワード"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button
-        className="my-10 w-32 h-10 rounded-full shadow font-bold text-lg italic bg-green-300 sm:hover:bg-green-400"
-        onClick={logIn}
-      >
-        Login
-      </button>
+      <Button onClick={logIn}>Login</Button>
       <Link href="/signup">
         <a className="underline text-blue-800">初めての方はこちら</a>
       </Link>
