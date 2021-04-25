@@ -50,7 +50,7 @@ export const WordList: VFC<Props> = (props) => {
         );
       })}
       <PlusIcon
-        className="w-7 h-7 col-start-2 col-end-4 my-2 mx-auto p-1 rounded-full border-2 border-yellow-300 bg-gray-200 sm:col-end-2 sm:hover:bg-yellow-200"
+        className="cursor-pointer w-7 h-7 col-start-2 col-end-4 my-2 mx-auto p-1 rounded-full border-2 border-yellow-300 bg-gray-200 sm:col-end-2 sm:hover:bg-yellow-200"
         onClick={() => setOpen(true)}
       />
       <AddDialog open={open} setOpen={setOpen} title="新しい単語を追加">
