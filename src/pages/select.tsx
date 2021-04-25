@@ -8,12 +8,12 @@ import { Title } from "src/components/Title";
 const Select = () => {
   const router = useRouter();
   const { currentUser } = useContext(AuthContext);
-  const [folder, setFolder] = useState<string[]>([]);
+  const [currentFolder, setCurrentFolder] = useState<string[]>([]);
 
   useEffect(() => {
     const getFolder = async () => {
       if (currentUser) {
-        setFolder(await getList(currentUser.uid));
+        setCurrentFolder(await getList(currentUser.uid));
       }
     };
     getFolder();
@@ -23,7 +23,7 @@ const Select = () => {
     <Layout>
       <Title>単語帳選択</Title>
       <ul>
-        {folder.map((val, i) => {
+        {currentFolder.map((val, i) => {
           return (
             <li
               key={i}
