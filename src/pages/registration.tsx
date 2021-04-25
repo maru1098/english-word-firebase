@@ -1,6 +1,6 @@
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useState, useEffect, Fragment } from "react";
-import { getList, registFolder } from "src/db/DbProvider";
+import { getList, registFolder, deleteFolder } from "src/db/DbProvider";
 import { Layout } from "src/components/layout";
 import { Title } from "src/components/Title";
 import { Button } from "src/components/Button";
@@ -13,7 +13,7 @@ const Registration = () => {
   const [createFolder, setCreateFolder] = useState<string>("");
   const [currentFolder, setCurrentFolder] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
-  const [addedFolder, setAddedFolder] = useState(false);
+  const [changeFolder, setChangeFolder] = useState(false);
 
   useEffect(() => {
     const getFolder = async () => {
@@ -22,8 +22,8 @@ const Registration = () => {
       }
     };
     getFolder();
-    setAddedFolder(false);
-  }, [currentUser, addedFolder]);
+    setChangeFolder(false);
+  }, [currentUser, changeFolder]);
 
   return (
     <Layout>
@@ -35,7 +35,13 @@ const Registration = () => {
               <Disclosure.Button className="rounded-full my-1 py-2 px-5 col-start-2 col-end-4 border-4 text-center bg-gray-100 border-green-300 sm:hover:bg-green-200 sm:col-start-2 sm:col-end-3">
                 {val}
               </Disclosure.Button>
-              <FolderRemoveIcon className="h-6 w-6 ml-3" />
+              <FolderRemoveIcon
+                className="cursor-pointer h-10 w-10 ml-3 p-2 sm:hover:bg-red-400 rounded-full"
+                onClick={async () => {
+                  await deleteFolder(currentUser.uid, val);
+                  setChangeFolder(true);
+                }}
+              />
             </div>
             <Disclosure.Panel>
               <WordList uid={currentUser.uid} folder={val} />
@@ -109,7 +115,7 @@ const Registration = () => {
                   <Button
                     onClick={async () => {
                       await registFolder(currentUser.uid, createFolder);
-                      setAddedFolder(true);
+                      setChangeFolder(true);
                       setOpen(false);
                     }}
                   >

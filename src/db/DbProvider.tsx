@@ -34,6 +34,22 @@ export const registFolder = async (uid, folder) => {
   }
 };
 
+export const deleteFolder = async (uid, folder) => {
+  const folderIdxRef = db.collection("user").doc(uid);
+  const folderRef = db.collection("user").doc(uid).collection(folder);
+  const words = await folderRef.get();
+  words.forEach((doc) => {
+    folderRef.doc(doc.id).delete();
+  });
+  try {
+    folderIdxRef.update({
+      folder: firebase.firestore.FieldValue.arrayRemove(folder),
+    });
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
 export const getList = async (uid) => {
   const folderIdxRef = db.collection("user").doc(uid);
   const folders = await folderIdxRef.get();
