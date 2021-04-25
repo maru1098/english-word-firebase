@@ -1,6 +1,6 @@
 import { AuthContext } from "src/auth/AuthProvider";
-import { useContext, useState, useRef, useEffect, Fragment } from "react";
-import { registWord, getList } from "src/db/DbProvider";
+import { useContext, useState, useEffect, Fragment } from "react";
+import { getList, registFolder } from "src/db/DbProvider";
 import { Layout } from "src/components/layout";
 import { Title } from "src/components/Title";
 import { Button } from "src/components/Button";
@@ -10,20 +10,10 @@ import { FolderRemoveIcon, FolderAddIcon } from "@heroicons/react/outline";
 
 const Registration = () => {
   const { currentUser } = useContext(AuthContext);
-  const [english, setEnglish] = useState<string>("");
-  const [japanese, setJapanese] = useState<string>("");
   const [createFolder, setCreateFolder] = useState<string>("");
   const [currentFolder, setCurrentFolder] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
-  const englishRef: React.RefObject<HTMLInputElement> = useRef();
-  const japaneseRef: React.RefObject<HTMLInputElement> = useRef();
-
-  const handleRegist = async () => {
-    await registWord(currentUser.uid, createFolder, english, japanese);
-    alert(`${english}が登録されました`);
-    englishRef.current.value = "";
-    japaneseRef.current.value = "";
-  };
+  const [addedFolder, setAddedFolder] = useState(false);
 
   useEffect(() => {
     const getFolder = async () => {
@@ -32,7 +22,8 @@ const Registration = () => {
       }
     };
     getFolder();
-  }, [currentUser]);
+    setAddedFolder(false);
+  }, [currentUser, addedFolder]);
 
   return (
     <Layout>
@@ -54,7 +45,7 @@ const Registration = () => {
       })}
 
       <FolderAddIcon
-        className="my-2 h-16 w-16 p-2 rounded-full border-4 border-yellow-300 bg-gray-100"
+        className="cursor-pointer my-2 h-16 w-16 p-2 rounded-full border-4 border-yellow-300 bg-gray-100 sm:hover:bg-yellow-100"
         onClick={() => setOpen(true)}
       />
 
@@ -115,40 +106,21 @@ const Registration = () => {
                   />
                 </div>
                 <div className="text-center">
-                  <Button onClick={() => setOpen(false)}>登録</Button>
+                  <Button
+                    onClick={async () => {
+                      await registFolder(currentUser.uid, createFolder);
+                      setAddedFolder(true);
+                      setOpen(false);
+                    }}
+                  >
+                    登録
+                  </Button>
                 </div>
               </div>
             </Transition.Child>
           </div>
         </Dialog>
       </Transition>
-      {/* <Dialog
-        className="fixed z-10 inset-0 overflow-y-auto "
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <div className="grid grid-rows-3 grid-cols-3 min-h-screen">
-          <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          <div className="row-start-2 row-end-3 col-start-2 col-end-3 bg-white">
-            <Dialog.Title className="text-lg font-medium">
-              新しい単語帳を追加
-            </Dialog.Title>
-            <div className="flex flex-col justify-center items-center">
-              <label htmlFor="folder" className="m-1 text-2xl">
-                単語帳名
-              </label>
-              <input
-                id="folder"
-                className="mx-5 p-2 w-52 shadow border"
-                type="text"
-                placeholder="単語帳の名前を入力"
-                onChange={(e) => setCreateFolder(e.target.value)}
-              />
-            </div>
-            <Button onClick={() => setOpen(false)}>登録</Button>
-          </div>
-        </div>
-      </Dialog> */}
     </Layout>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, VFC } from "react";
-import { setWord } from "src/db/DbProvider";
+import React, { useRef, useState, useEffect, VFC } from "react";
+import { setWord, registWord } from "src/db/DbProvider";
 import { TrashIcon, PlusIcon } from "@heroicons/react/outline";
 
 type Props = {
@@ -11,6 +11,17 @@ export const WordList: VFC<Props> = (props) => {
   const [wordData, setWordData] = useState<{
     [key: string]: { [key: string]: string | boolean };
   }>({});
+  const englishRef: React.RefObject<HTMLInputElement> = useRef();
+  const japaneseRef: React.RefObject<HTMLInputElement> = useRef();
+  const [english, setEnglish] = useState<string>("");
+  const [japanese, setJapanese] = useState<string>("");
+  const handleRegist = async () => {
+    await registWord(props.uid, props.folder, english, japanese);
+    alert(`${english}が登録されました`);
+    englishRef.current.value = "";
+    japaneseRef.current.value = "";
+  };
+
   useEffect(() => {
     const getWord = async () => {
       setWordData(await setWord(props.uid, props.folder));

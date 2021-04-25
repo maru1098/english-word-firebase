@@ -2,18 +2,30 @@ import { db } from "src/utils/firebase";
 import firebase from "firebase/app";
 
 export const registWord = async (uid, folder, english, japanese) => {
-  const folderRef = db.collection("user").doc(uid);
+  const wordRef = db
+    .collection("user")
+    .doc(uid)
+    .collection(folder)
+    .doc(english);
   try {
-    await folderRef.collection(folder).doc(english).set({
+    await wordRef.set({
       japanese: japanese,
       isFlag: false,
     });
-    if ((await folderRef.get()).exists) {
-      await folderRef.update({
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
+export const registFolder = async (uid, folder) => {
+  const folderIdxRef = db.collection("user").doc(uid);
+  try {
+    if ((await folderIdxRef.get()).exists) {
+      await folderIdxRef.update({
         folder: firebase.firestore.FieldValue.arrayUnion(folder),
       });
     } else {
-      folderRef.set({
+      folderIdxRef.set({
         folder: [folder],
       });
     }
@@ -23,8 +35,8 @@ export const registWord = async (uid, folder, english, japanese) => {
 };
 
 export const getList = async (uid) => {
-  const userRef = db.collection("user").doc(uid);
-  const folders = await userRef.get();
+  const folderIdxRef = db.collection("user").doc(uid);
+  const folders = await folderIdxRef.get();
   return folders.data().folder;
 };
 
