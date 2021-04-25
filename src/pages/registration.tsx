@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AuthContext } from "src/auth/AuthProvider";
 import { useContext, useState, useRef } from "react";
 import { registWord, getList } from "src/db/DbProvider";
