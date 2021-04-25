@@ -56,8 +56,8 @@ export const CardLayout: VFC<Props> = (props) => {
       </div>
       <Word
         className={clsx(
-          "mx-auto p-3",
-          isFront ? "text-7xl " : "text-6xl mb-11 mt-2"
+          "mx-auto p-3 break-all",
+          isFront ? "text-6xl " : "text-5xl mb-11 mt-2"
         )}
         word={isFront ? props.english : props.japanese}
       />
