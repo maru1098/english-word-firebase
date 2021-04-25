@@ -32,12 +32,12 @@ const Registration = () => {
       {currentFolder.map((val, i) => {
         return (
           <Disclosure key={i}>
-            <div className="flex items-center">
-              <Disclosure.Button className="rounded-full my-1 py-2 px-5 col-start-2 col-end-4 border-4 text-center bg-gray-100 border-green-300 sm:hover:bg-green-200 sm:col-start-2 sm:col-end-3">
+            <div className="flex items-center mx-auto">
+              <Disclosure.Button className="ml-10 rounded-full mb-2 py-2 px-5 border-4 text-center bg-gray-100 border-green-300 sm:hover:bg-green-200 sm:col-start-2 sm:col-end-3">
                 {val}
               </Disclosure.Button>
               <FolderRemoveIcon
-                className="cursor-pointer h-8 w-8 ml-2 p-1 border-2 border-red-400 sm:hover:bg-red-200 rounded-full"
+                className="mr-10 flex-shrink-0 cursor-pointer rounded-full h-8 w-8 ml-2 p-1 border-2 border-red-400 sm:hover:bg-red-200 "
                 color="red"
                 onClick={async () => {
                   await deleteFolder(currentUser.uid, val);
@@ -53,7 +53,7 @@ const Registration = () => {
       })}
 
       <FolderAddIcon
-        className="cursor-pointer my-2 h-16 w-16 p-2 rounded-full border-4 border-yellow-300 bg-gray-100 sm:hover:bg-yellow-100"
+        className="cursor-pointer mt-5 mb-10 h-16 w-16 p-2 rounded-full border-4 border-yellow-300 bg-gray-100 sm:hover:bg-yellow-100"
         onClick={() => setOpen(true)}
       />
 
