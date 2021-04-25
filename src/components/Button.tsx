@@ -20,7 +20,9 @@ export const Button: FC<Props> = (props) => {
 export const BackButton = () => {
   return (
     <Link href="/">
-      <ChevronLeftIcon className="h-12 w-12 m-2 self-center justify-self-center sm:hover:bg-gray-100 rounded-full p-1" />
+      <a className="self-center justify-self-center">
+        <ChevronLeftIcon className="h-12 w-12 m-2 sm:hover:bg-gray-100 rounded-full p-1" />
+      </a>
     </Link>
   );
 };
