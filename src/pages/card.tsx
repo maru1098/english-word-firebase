@@ -40,9 +40,9 @@ const Card: NextPage = () => {
   return (
     <Layout className="justify-between">
       <Title>単語カード</Title>
-      <div className="w-screen grid grid-cols-7 sm:grid-cols-4">
+      <div className="w-screen grid grid-cols-9 sm:grid-cols-4">
         <SwipeableViews
-          className="h-48 col-start-2 col-end-7 sm:col-end-4"
+          className="col-start-2 col-end-9 sm:col-end-4"
           index={index}
           onChangeIndex={(index: number) => setIndex(index)}
         >
