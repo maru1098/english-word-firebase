@@ -1,5 +1,5 @@
 import React, { useState, useEffect, VFC } from "react";
-import { setWord, registWord } from "src/db/DbProvider";
+import { setWord, registWord, deleteWord } from "src/db/DbProvider";
 import { TrashIcon, PlusIcon } from "@heroicons/react/outline";
 import { AddDialog } from "src/components/AddDialog";
 import { Button } from "src/components/Button";
@@ -33,11 +33,18 @@ export const WordList: VFC<Props> = (props) => {
         return (
           <li
             key={i}
-            className="my-1 col-start-2 col-end-4 border-4 text-center bg-gray-100 border-green-300 sm:hover:bg-green-200 sm:col-start-2 sm:col-end-3"
+            className="my-1 col-start-2 col-end-4 border-4 text-center bg-gray-100 border-green-300 sm:col-start-2 sm:col-end-3"
           >
             <div className="flex justify-around items-center text-center">
               {val}
-              <TrashIcon className="h-5 w-5" />
+              <TrashIcon
+                className="cursor-pointer h-5 w-5 border border-red-400 sm:hover:bg-red-200"
+                color="red"
+                onClick={async () => {
+                  await deleteWord(props.uid, props.folder, val);
+                  setIsChange(true);
+                }}
+              />
             </div>
           </li>
         );

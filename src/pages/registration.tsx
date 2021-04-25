@@ -37,7 +37,8 @@ const Registration = () => {
                 {val}
               </Disclosure.Button>
               <FolderRemoveIcon
-                className="cursor-pointer h-10 w-10 ml-3 p-2 sm:hover:bg-red-400 rounded-full"
+                className="cursor-pointer h-8 w-8 ml-2 p-1 border-2 border-red-400 sm:hover:bg-red-200 rounded-full"
+                color="red"
                 onClick={async () => {
                   await deleteFolder(currentUser.uid, val);
                   setIsChange(true);

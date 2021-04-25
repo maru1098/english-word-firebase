@@ -50,6 +50,19 @@ export const deleteFolder = async (uid, folder) => {
   }
 };
 
+export const deleteWord = async (uid, folder, english) => {
+  const wordRef = db
+    .collection("user")
+    .doc(uid)
+    .collection(folder)
+    .doc(english);
+  try {
+    wordRef.delete();
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
 export const getList = async (uid) => {
   const folderIdxRef = db.collection("user").doc(uid);
   const folders = await folderIdxRef.get();
