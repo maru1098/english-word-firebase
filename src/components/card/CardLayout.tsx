@@ -43,14 +43,14 @@ export const CardLayout: VFC<Props> = (props) => {
     <div className="flex flex-col justify-between rounded border-b-2 border-r-2 border-gray-400 bg-gray-300 ">
       <div className="flex justify-between">
         <FlagIcon
-          className="w-10 h-10 ml-2 mt-2 opacity-60 sm:hover:bg-gray-100 rounded-full p-1"
+          className="cursor-pointer w-10 h-10 ml-2 mt-2 opacity-60 sm:hover:bg-gray-100 rounded-full p-1"
           fill={isFlag ? "yellow" : "none"}
           onClick={() => {
             isFlag ? setIsFlag(false) : setIsFlag(true);
           }}
         />
         <SwitchHorizontalIcon
-          className="w-10 h-10 mr-2 mt-2 opacity-60 sm:hover:bg-gray-100 rounded-full p-1"
+          className="cursor-pointer w-10 h-10 mr-2 mt-2 opacity-60 sm:hover:bg-gray-100 rounded-full p-1"
           onClick={isFront ? () => setIsFront(false) : () => setIsFront(true)}
         />
       </div>
@@ -63,7 +63,7 @@ export const CardLayout: VFC<Props> = (props) => {
       />
       {isFront && (
         <VolumeUpIcon
-          className="w-10 h-10 mr-2 self-end opacity-60 sm:hover:bg-gray-100 rounded-full p-1"
+          className="cursor-pointer w-10 h-10 mr-2 mb-2 self-end opacity-60 sm:hover:bg-gray-100 rounded-full p-1"
           onClick={() => speakText(props.english)}
         />
       )}
