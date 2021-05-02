@@ -30,7 +30,7 @@ const Select = () => {
               className="mb-2 col-start-2 col-end-7 py-8 text-center text-2xl border border-gray-500 bg-gray-300 sm:col-end-3 sm:cursor-pointer sm:hover:bg-gray-100"
               onClick={async () => {
                 router.push({
-                  pathname: "/card",
+                  pathname: router.query.mode as string,
                   query: { folder: val },
                 });
               }}

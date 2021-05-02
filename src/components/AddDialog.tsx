@@ -49,7 +49,7 @@ export const AddDialog: FC<Props> = (props) => {
             <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl sm:max-w-sm">
               <Dialog.Title
                 as="h3"
-                className="text-lg font-medium leading-6 p-2 text-center rounded-full bg-green-200 text-gray-900"
+                className="text-2xl font-medium leading-6 p-2 text-center rounded-full bg-green-200 text-gray-900"
               >
                 {props.title}
               </Dialog.Title>

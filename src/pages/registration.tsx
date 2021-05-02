@@ -59,7 +59,7 @@ const Registration = () => {
 
       <AddDialog open={open} setOpen={setOpen} title="新しい単語帳を追加">
         <div className="flex flex-col justify-center items-center">
-          <label htmlFor="folder" className="m-1 text-2xl">
+          <label htmlFor="folder" className="m-1 text-xl">
             単語帳名
           </label>
           <input

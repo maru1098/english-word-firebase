@@ -55,7 +55,7 @@ export const WordList: VFC<Props> = (props) => {
       />
       <AddDialog open={open} setOpen={setOpen} title="新しい単語を追加">
         <div className="flex flex-col justify-center items-center">
-          <label htmlFor="english" className=" m-1 text-2xl">
+          <label htmlFor="english" className=" m-1 text-xl">
             英語
           </label>
           <input
@@ -65,7 +65,7 @@ export const WordList: VFC<Props> = (props) => {
             placeholder="英単語を入力"
             onChange={(e) => setEnglish(e.target.value)}
           />
-          <label htmlFor="japanese" className="m-1 text-2xl">
+          <label htmlFor="japanese" className="m-1 text-xl">
             日本語
           </label>
           <input
